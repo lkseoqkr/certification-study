@@ -1,0 +1,73 @@
+# Cloud Load Balancing
+- Distributes user traffic across instances of an application in single region or multiple regions
+  - Fully distributed, software defined managed service
+- Enables:
+  - High Availability
+  - Auto Scaling 
+  - Resiliency
+# HTTP vs HTTPS vs TCP vs TLS vs UDP
+- Network Layer(L3)
+  - IP
+  - Transfer bits and bytes
+  - unreliable
+- Transport Layer(L4) - Are the bits and bytes transferred properly?
+  - TCP (Transmission Control) : Reliability > performance
+  - TLS (Transport Layer Security) : Secure TCP
+  - UDP (User Datagram Protocol) : Performance > reliability
+- Application Layer(L7) - Make REST API calls and Send Emails
+  - HTTP (Hyper Text Transfer Protocol) : Stateless request response cycle
+  - HTTPS : secure HTTP
+  - SMTP : email transfer protocol\
+- **(Remember)**
+  - Each layer makes use of the layers beneath it 
+  - Most applications talk at application layer.
+  - BUT some applications talk at transport layer directly(high performance).
+# Cloud Load Balancing - Terminology
+- **Backend**
+  - Group of endpoints that receive traffic from a Google Cloud load balancer
+  - (example: instance groups)
+- **Frontend**
+  - Specify an IP address, port and protocol.
+  - This IP address is the frontend IP for your clients requests.
+- **Host and path rules** (For HTTP(S) Load Balancing)
+  - Define rules redirecting the traffic to different backends
+  - Based on path - in28minutes.com/a vs in28minutes.com/b
+  - Based on Host - a.in28minutes.com vs b.in28minutes.com
+  - Based on HTTP headers (Authorization header) and methods (POST, GET, etc)
+# Load Balancing - SSL/TLS Termination/Offloading
+- Client to Load Balancer: Over internet
+  - HTTPS recommended
+- Load Balancer to VM instance: Through Google internal network
+  - HTTP is ok. HTTPS is preferred
+- SSL/TLS Termination/Offloading
+  - Client to Load Balancer: HTTPS/TLS
+  - Load Balancer to VM instance: HTTP/TCP
+# Cloud Load Balancing - Choosing Load Balancer
+- External ->
+  - HTTP / HTTPS ->
+    - HTTP(S) Load Balancer
+  - TCP traffic ->
+    - SSL offload? ->
+      - YES : SSL proxy
+      - NO : Global Load Balancer or IPv6? ->
+        - YES : TCP Proxy
+        - NO : Preserve IP? ->
+          - YES : Network TCP/UDP Load balancing
+          - NO : TCP Proxy
+- Internal ->
+  - TCP / UDP traffic ->
+    - Internal TCP / UDP load balancer
+  - HTTP(S) traffic ->
+    - internal HTTP(S) load balancer
+# Load Balancer Scenarios (*sample-question*)
+- You want only healthy instances to receive traffic
+  - Configure health check
+- You want high availability for your VM instances
+  - Create Multiple MIGs for your VM instances in multiple regions. Load balance using a Load Balancer.
+- You want to route requests to multiple microservices using the same load balancer
+  - Create individual MIGs and backends for each microservice.
+  - Create Host and path rules to redirect to specific microservice backend based on the path (/microservice-a, /microservice-b etc)
+- You want to load balance Global external HTTPS traffic across backend instances, across multiple regions
+  - Choose External HTTP(S) Load Balancer
+- You want SSL termination for Global non-HTTPS traffic with load balancing
+  - Choose SSL Proxy Load Balancer
