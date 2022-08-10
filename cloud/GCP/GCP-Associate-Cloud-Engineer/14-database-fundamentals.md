@@ -14,24 +14,24 @@
   - Challenge 2: You will lose data if the database crashes
 # Database - Snapshots
 - Let's automate taking copy of the database (take a snapshot) every hour to another data center in London
- - Challenge 1: Your database will go down if the data center crashes
- - Challenge 2 (PARTIALLY SOLVED): You will lose data if the database crashes 
-  - You can setup database from latest snapshot. But depending on when failure occurs you can lose up to an hour of data
- - Challenge 3(NEW): Database will be slow when you take snapshots
+  - Challenge 1: Your database will go down if the data center crashes
+  - Challenge 2 (PARTIALLY SOLVED): You will lose data if the database crashes 
+    - You can setup database from latest snapshot. But depending on when failure occurs you can lose up to an hour of data
+  - Challenge 3(NEW): Database will be slow when you take snapshots
 # Database - Transaction Logs
 - Let's add transaction logs to database and create a process to copy it over to the second data center
   - Challenge 1: Your database will go down if the data center crashes
   - Challenge 2 (SOLVED): You will lose data if the database crashes 
-   - You can setup database from latest snapshot and apply transaction logs
+    - You can setup database from latest snapshot and apply transaction logs
   - Challenge 3: Database will be slow when you take snapshots
 # Database - Add a Standby
 - Let's add a standby database in the second data center with replication
   - Challenge 1 (SOLVED): Your database will go down if the data center crashes
-   - You can switch to the standby database
+    - You can switch to the standby database
   - Challenge 2 (SOLVED): You will lose data if the database crashes
   - Challenge 3 (SOLVED): Database will be slow when you take snapshots
-   - Take snapshots from standby.
-   - Applications connecting to master will get good performance always
+    - Take snapshots from standby.
+    - Applications connecting to master will get good performance always
 # Availability and Durability
 - Availability 
   - Will I be able to access my data now and when I need it? 
@@ -106,7 +106,7 @@
 # Database Categories
 - Choosing type of database for your use case is not easy. A few factors:
   - Do you want a fixed schema?
-   - Do you want flexibility in defining and changing your schema? (schemaless)
+    - Do you want flexibility in defining and changing your schema? (schemaless)
   - What level of transaction properties do you need? (atomicity and consistency)
   - What kind of latency do you want? (seconds, milliseconds or microseconds)
   - How many transactions do you expect? (hundreds or thousands or millions of transactions per second)
@@ -156,13 +156,13 @@
 - Cloud Datastore - Managed serverless NoSQL document database
   - Provides ACID transactions, SQL-like queries, indexes
   - Firestore (next version of Datastore) adds:
-   - Strong consistency
-   - Mobile and Web client libraries
+    - Strong consistency
+    - Mobile and Web client libraries
   - Recommended for small to medium databases (0 to a few Terabytes)
 - Cloud BigTable - Managed, scalable NoSQL wide column database
   - Recommend for data size > 10 Terabytes to several Petabytes
   - Recommended for large analytical and operational workloads
-   - NOT recommended for transactional workloads (Does NOT support multi row transactions - supports ONLY Single-row transactions)
+    - NOT recommended for transactional workloads (Does NOT support multi row transactions - supports ONLY Single-row transactions)
 # In-memory Databases
 - Retrieving data from memory is much faster than retrieving data from disk
 - like Redis deliver microsecond latency by storing persistent data in memory
@@ -222,7 +222,7 @@
   - Scales to PBs of data with automatic sharding
 - scales horizontally for reads and writes
   - (REMEMBER) In comparison, Cloud SQL provides read replicas:
-   - BUT you cannot horizontally scale write operations with Cloud SQL!
+    - BUT you cannot horizontally scale write operations with Cloud SQL!
 - Regional and Multi-Regional configurations
 - Expensive (compared to Cloud SQL): Pay for nodes & storage
 - Data Export: Use Cloud Console to export data
@@ -281,8 +281,8 @@
 - BigQuery: to/from Cloud Storage and Others (bq extract/load)
   - From Console/bq
   - Variety of options to import data
-   - Load data from Cloud Storage
-    - Data Store > Cloud Storage > Big Query
+    - Load data from Cloud Storage
+      - Data Store > Cloud Storage > Big Query
    - Batch Loading with BigQuery Data Transfer Service
    - Use Dataflow to setup streaming pipeline
 # NoSQL Databases - Import and Export
